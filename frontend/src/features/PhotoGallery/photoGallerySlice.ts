@@ -17,15 +17,15 @@ const initialState: Initial = {
 };
 
 export const photoGallerySlice = createSlice({
-  name: 'photo-gallery',
+  name: 'photoGallery',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getData.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getData.fulfilled, (state, action) => {
-      state.photo = action.payload;
+    builder.addCase(getData.fulfilled, (state, {payload: data}) => {
+      state.photo = data;
       state.loading = false;
     });
     builder.addCase(getData.rejected, (state) => {

@@ -7,16 +7,10 @@ import {imagesUpload} from "../multer";
 
 const PhotoGalleryRouter = express.Router();
 
-PhotoGalleryRouter.get('/', role, async (req, res, next) => {
+PhotoGalleryRouter.get('/', async (req, res, next) => {
   try {
-    const user = (req as RequestWithUser).user;
-    const queryUser = req.query.user as string;
-    let photo;
-    if (queryUser) {
-      photo = await PhotoGallery.find({author: queryUser}).populate('user', 'displayName');
-    } else if (user && user.role === "admin") {
-      photo = await PhotoGallery.find();
-    }
+    const photo = await PhotoGallery.find().populate('author', 'displayName');
+
     return res.send(photo);
   } catch(e) {
     return next(e);
@@ -25,7 +19,7 @@ PhotoGalleryRouter.get('/', role, async (req, res, next) => {
 
 PhotoGalleryRouter.get('/:id', role, async (req, res, next) => {
   try {
-    const response = await PhotoGallery.find({_id: req.params.id}).populate('user', 'displayName');
+    const response = await PhotoGallery.find({_id: req.params.id}).populate('author', 'displayName');
     return res.send(response);
   } catch {
     return res.sendStatus(500);

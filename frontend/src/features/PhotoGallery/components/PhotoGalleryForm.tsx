@@ -56,7 +56,7 @@ const PhotoGalleryForm: React.FC = () => {
         <Grid container direction="row" spacing={2} sx={{marginY: '15px'}}>
           <Grid container item alignItems="center" xs={12}>
             <Grid item sx={{ paddingLeft: '20px', width: '20%' }}>
-              <Typography variant="h6">Name</Typography>
+              <Typography variant="h6">Title</Typography>
             </Grid>
             <TextField
               sx={{margin: '20px', width: '70%'}}

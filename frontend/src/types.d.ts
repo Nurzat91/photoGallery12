@@ -41,7 +41,10 @@ export interface PhotoMutation{
 }
 export interface Photo{
   _id: string;
-  author: string;
+  author: {
+    _id: string,
+    displayName: string,
+  };
   title: string;
   image: string;
 }
