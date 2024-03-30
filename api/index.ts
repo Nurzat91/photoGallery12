@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import config from "./config";
 import userRouter from './routers/user';
+import PhotoGalleryRouter from "./routers/photoGallery";
 
 const app = express();
 const port = 8000;
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRouter);
+app.use('/photo-gallery', PhotoGalleryRouter);
 
 const run = async () => {
 

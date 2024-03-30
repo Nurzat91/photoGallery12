@@ -14,3 +14,8 @@ interface UserMethods{
 }
 
 type UserModel = Model<UserFields, {}, UserMethods>;
+export interface Photo{
+  author: Types.ObjectId;
+  title: string;
+  image: string | null;
+}
