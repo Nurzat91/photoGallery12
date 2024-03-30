@@ -29,18 +29,18 @@ const PhotoGalleryCard: React.FC<state>  = ({photo}) => {
   };
 
   const onClickNavigate = () => {
-    navigate('/cocktails/' + photo._id);
+    navigate(`/photo-gallery/my-gallery?user=${photo.author._id}`);
   };
 
   return (
     <Card sx={{width: '30%', margin: '1%'}}>
       <CardMedia onClick={onClickNavigate} component="img" height="200" image={imgUrl} alt="Photo"/>
       <CardContent>
-        <CardActionArea onClick={onClickNavigate}>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardActionArea>
+          <Typography gutterBottom variant="h6" component="div">
             {photo.title}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography onClick={onClickNavigate} gutterBottom variant="h5" component="div">
             {photo.author.displayName}
           </Typography>
         </CardActionArea>

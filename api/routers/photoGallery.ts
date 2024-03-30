@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose, {HydratedDocument} from "mongoose";
+import mongoose from "mongoose";
 import auth, { RequestWithUser } from "../middleware/auth";
 import role from "../middleware/role";
 import PhotoGallery from "../models/PhotoGallery";

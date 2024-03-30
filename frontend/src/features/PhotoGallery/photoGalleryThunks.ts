@@ -17,7 +17,7 @@ export const getDataByAuthor = createAsyncThunk<Photo[], string>(
   'photo-gallery/getDataByAuthor',
   async (id) => {
   try {
-    const response = await axiosApi.get('/photo-gallery?user=' + id);
+    const response = await axiosApi.get('/photo-gallery/my-gallery?user=' + id);
     return response.data;
   } catch (e) {
     return e;

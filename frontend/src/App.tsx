@@ -6,6 +6,7 @@ import Register from './features/users/Register';
 import Login from './features/users/Login';
 import PhotoGalleryForm from "./features/PhotoGallery/components/PhotoGalleryForm";
 import PhotoGallery from "./features/PhotoGallery/PhotoGallery";
+import PhotoGalleryPageUser from "./features/PhotoGallery/PhotoGalleryPageUser";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<PhotoGallery/>} />
             <Route path="/photo-gallery/new" element={<PhotoGalleryForm />} />
+            <Route path="/photo-gallery/my-gallery" element={<PhotoGalleryPageUser />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<ErrorPage/>} />
