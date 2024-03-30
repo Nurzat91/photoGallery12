@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {usersReducer} from "../features/users/usersSlice";
+import {photoGalleryReducer} from "../features/PhotoGallery/photoGallerySlice";
 
 const usersPersistConfig = {
   key: 'photo-gallery:users',
@@ -9,8 +10,8 @@ const usersPersistConfig = {
   whitelist: ['user'],
 };
 const rootReducer = combineReducers({
-
   users: persistReducer(usersPersistConfig, usersReducer),
+  photoGallery: (photoGalleryReducer),
 });
 export const store = configureStore({
   reducer: rootReducer,

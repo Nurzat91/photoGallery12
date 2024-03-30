@@ -34,3 +34,14 @@ export interface RegisterMutation {
   password: string;
   displayName: string;
 }
+
+export interface PhotoMutation{
+  title: string;
+  image: File | null;
+}
+export interface Photo{
+  _id: string;
+  author: string;
+  title: string;
+  image: string;
+}
