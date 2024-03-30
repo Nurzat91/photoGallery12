@@ -1,5 +1,6 @@
-import React from 'react';
-import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@mui/material';
+import React, {useState} from 'react';
+import { Button, Card, CardActionArea, CardContent, CardMedia, Dialog,
+  DialogActions, DialogContent, DialogContentText, Grid, Typography} from '@mui/material';
 import {apiURL} from '../../../constants';
 import {useNavigate} from 'react-router-dom';
 import {LoadingButton} from '@mui/lab';
@@ -17,10 +18,8 @@ const PhotoGalleryCard: React.FC<state>  = ({photo}) => {
   const deleting = useAppSelector(selectDeletingPhoto);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  let imgUrl;
-  if (photo.image) {
-    imgUrl = `${apiURL}/${photo.image}`;
-  }
+  const [open, setOpen] = useState(false);
+  const imgUrl = photo.image ? `${apiURL}/${photo.image}` : '';
 
 
   const onDelete = async () => {
@@ -28,31 +27,50 @@ const PhotoGalleryCard: React.FC<state>  = ({photo}) => {
     await dispatch(getData());
   };
 
+  const onClickNavigateByPhoto = () => {
+    setOpen(true);
+  };
   const onClickNavigate = () => {
     navigate(`/photo-gallery/my-gallery?user=${photo.author._id}`);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Card sx={{width: '30%', margin: '1%'}}>
-      <CardMedia onClick={onClickNavigate} component="img" height="200" image={imgUrl} alt="Photo"/>
-      <CardContent>
-        <CardActionArea>
-          <Typography gutterBottom variant="h6" component="div">
-            {photo.title}
-          </Typography>
-          <Typography onClick={onClickNavigate} gutterBottom variant="h5" component="div">
-            {photo.author.displayName}
-          </Typography>
+    <>
+      <Card sx={{ width: '30%', margin: '1%' }}>
+        <CardActionArea onClick={onClickNavigateByPhoto}>
+          <CardMedia component="img" height="200" image={imgUrl} alt="Photo" />
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="div">
+              {photo.title}
+            </Typography>
+            <Typography onClick={onClickNavigate} gutterBottom variant="h5" component="div">
+              {photo.author.displayName}
+            </Typography>
+            {user?.role === 'admin' && (
+              <LoadingButton variant="contained" onClick={onDelete} disabled={deleting}>
+                Delete
+              </LoadingButton>
+            )}
+          </CardContent>
         </CardActionArea>
-        {user?.role === 'admin' ? (
-          <LoadingButton variant="contained" onClick={onDelete} loading={deleting}>
-            Delete
-          </LoadingButton>
-        ) : (
-          ''
-        )}
-      </CardContent>
-    </Card>
+      </Card>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <DialogContentText>
+            <img src={imgUrl} alt="Photo" style={{ maxWidth: '100%', height: 'auto' }} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Grid container item alignItems="center" xs={7}>
+            <Button onClick={handleClose}>Close</Button>
+          </Grid>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
