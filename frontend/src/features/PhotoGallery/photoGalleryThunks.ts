@@ -7,7 +7,7 @@ export const getData = createAsyncThunk<Photo[]>(
   async () => {
   try {
     const response = await axiosApi.get('/photo-gallery');
-    return response.data;
+    return response.data.reverse();
   } catch (e) {
     return e;
   }

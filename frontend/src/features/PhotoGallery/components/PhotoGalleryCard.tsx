@@ -41,8 +41,8 @@ const PhotoGalleryCard: React.FC<state>  = ({photo}) => {
   return (
     <>
       <Card sx={{ width: '30%', margin: '1%' }}>
-        <CardActionArea onClick={onClickNavigateByPhoto}>
-          <CardMedia component="img" height="200" image={imgUrl} alt="Photo" />
+        <CardActionArea>
+          <CardMedia onClick={onClickNavigateByPhoto} component="img" height="200" image={imgUrl} alt="Photo" />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
               {photo.title}
